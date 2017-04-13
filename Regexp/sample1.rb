@@ -9,7 +9,7 @@ def check(str)
   end
 end
 
-print("((¥d+)(yen)) にマッチするかどうか\n\n")
+print("((\d+)(yen)) にマッチするかどうか\n\n")
 
 check("1980yen")
 check("340yen")
