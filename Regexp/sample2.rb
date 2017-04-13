@@ -1,3 +1,14 @@
+require 'uri'
+
+def add_query(url, key, value)
+  uri = URI.parse(url)
+  if uri.query.nil?
+    uri.query = key + '=' + value
+  else
+    uri.query = uri.query + '&' + key + '=' + value
+  end
+  uri.to_s
+end
 
 str = <<EOS
 ■テキスト　テキスト：
@@ -19,8 +30,9 @@ puts str
 REG1 = %r{(https?://[\w/:%#\$&\?\(\)~\.=\+\-]+)}
 REG2 = %r{(https?://[-_.!~*\'()a-zA-Z0-9;/?:@&=+$,%#]+)}
 
-p str.scan(REG1)
-p str.scan(REG2)
+# p str.scan(REG1)
+# p str.scan(REG2)
 
-puts str.gsub(REG1, "#{$1}?aaa=bbb")
-puts str.gsub(REG2, "#{$1}?aaa=bbb")
+# puts str.gsub(REG1, "#{$1}?aaa=bbb")
+# puts str.gsub(REG2) { "#{$1}?aaa=bbb" }
+puts str.gsub(REG2) { "#{add_query($1, 'aaa', 'bbb')}" }
