@@ -1,0 +1,13 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    rantly (1.1.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  rantly
+
+BUNDLED WITH
+   1.14.6
