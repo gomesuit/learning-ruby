@@ -1,0 +1,3 @@
+- 参考
+  - https://developers.google.com/sheets/api/quickstart/ruby
+  - https://developers.google.com/api-client-library/ruby/auth/api-keys
