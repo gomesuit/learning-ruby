@@ -1,3 +1,5 @@
+require 'pry'
+
 require "google_drive"
 
 # Creates a session. This will prompt the credential via command line for the
@@ -11,6 +13,8 @@ session = GoogleDrive::Session.from_service_account_key(
 # https://docs.google.com/spreadsheet/ccc?key=pz7XtlQC-PYx-jrVMJErTcg
 # Or https://docs.google.com/a/someone.com/spreadsheets/d/pz7XtlQC-PYx-jrVMJErTcg/edit?usp=drive_web
 ws = session.spreadsheet_by_key("18q69hQTFtZ9sC2uO9nq4j5KS6ncdUubsJMhluGLcV5M").worksheets[0]
+
+#binding.pry
 
 # Gets content of A2 cell.
 p ws[2, 1]  #==> "hoge"
