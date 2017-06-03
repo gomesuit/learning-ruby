@@ -21,8 +21,6 @@ Amazon::Ecs::debug = true
 # To override default options
 res = Amazon::Ecs.item_search('ruby', :response_group => 'Medium', :sort => 'salesrank', :country => 'jp')
 
-binding.pry
-
 # Search Amazon UK
 res = Amazon::Ecs.item_search('ruby', :country => 'jp')
 
