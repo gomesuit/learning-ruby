@@ -2,7 +2,7 @@ require 'mechanize'
 require 'pry'
 
 agent = Mechanize.new
-page = agent.get('https://www.google.co.jp/')
+page = agent.get('https://www.google.co.jp?num=100')
 
 # body
 p page.body
@@ -20,6 +20,11 @@ p agent.cookies
 form = page.forms[0]
 form.q = "ゼルダ"
 result = agent.submit(form)
+
+# submit
+# page.form_with(name: 'f') do |form|
+#   form.q = 'ゼルダ'
+# end.submit
 
 # click
 result.links[0].click
