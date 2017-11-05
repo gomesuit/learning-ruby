@@ -8,14 +8,15 @@ Amazon::Ecs.configure do |options|
   options[:AWS_access_key_id] = ENV['AWS_ACCESS_KEY_ID']
   options[:AWS_secret_key] = ENV['AWS_SECRET_KEY']
   options[:associate_tag] = ENV['ASSOCIATE_TAG']
+  options[:country] = 'jp'
 end
 
 # To replace default options
 # Amazon::Ecs.options = { ... }
 Amazon::Ecs::debug = true
 
-asins = ['B00UGU4LF4','B010N2825O'] # limit 10 items
-res = Amazon::Ecs.item_lookup(asins.join(','),:country => 'jp')
+asins = ['B00UGU4LF4', 'B010N2825O'] # limit 10 items
+res = Amazon::Ecs.item_lookup(asins.join(','))
 
 p res.is_valid_request?
 p res.has_error?

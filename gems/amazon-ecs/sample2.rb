@@ -12,6 +12,7 @@ Amazon::Ecs.configure do |options|
   options[:AWS_access_key_id] = ENV['AWS_ACCESS_KEY_ID']
   options[:AWS_secret_key] = ENV['AWS_SECRET_KEY']
   options[:associate_tag] = ENV['ASSOCIATE_TAG']
+  options[:country] = 'jp'
 end
 
 # To replace default options
@@ -28,7 +29,6 @@ Amazon::Ecs::debug = true
 res = Amazon::Ecs.item_search(
   'ruby',
   :search_index => 'KindleStore',
-  :country => 'jp'
 )
 
 p res.is_valid_request?
