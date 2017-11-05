@@ -9,6 +9,7 @@ Amazon::Ecs.configure do |options|
   options[:AWS_secret_key] = ENV['AWS_SECRET_KEY']
   options[:associate_tag] = ENV['ASSOCIATE_TAG']
   options[:country] = 'jp'
+  options[:response_group] = 'Medium'
 end
 
 # To replace default options
