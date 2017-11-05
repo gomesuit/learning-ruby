@@ -9,7 +9,7 @@ Amazon::Ecs.configure do |options|
   options[:AWS_secret_key] = ENV['AWS_SECRET_KEY']
   options[:associate_tag] = ENV['ASSOCIATE_TAG']
   options[:country] = 'jp'
-  options[:response_group] = 'Medium'
+  options[:response_group] = 'Large'
 end
 
 # To replace default options
@@ -49,15 +49,15 @@ res.items.each do |item|
 
   # There are two ways to find elements:
   # 1) return an array of Amazon::Element
-  reviews = item.get_elements('EditorialReview')
-  reviews&.each do |review|
-    p el.get('Content')
-  end
+  #reviews = item.get_elements('EditorialReview')
+  #reviews.each do |review|
+  #  p el.get('Content')
+  #end
 
   # 2) return Nokogiri::XML::NodeSet object or nil if not found
-  reviews = item/'EditorialReview'
-  reviews&.each do |review|
-    el = Amazon::Element.new(review)
-    p el.get('Content')
-  end
+  #reviews = item/'EditorialReview'
+  #reviews&.each do |review|
+  #  el = Amazon::Element.new(review)
+  #  p el.get('Content')
+  #end
 end
