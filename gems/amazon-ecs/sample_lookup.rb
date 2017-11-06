@@ -42,22 +42,4 @@ res.items.each do |item|
 
   # Return a hash object with the element names as the keys
   p item.get_hash('SmallImage') # {:url => ..., :width => ..., :height => ...}
-
-  # Return the first matching path
-  #item_height = item.get_element('ItemDimensions/Height')
-  #item_height&.attributes['Units']        # 'hundredths-inches'
-
-  # There are two ways to find elements:
-  # 1) return an array of Amazon::Element
-  #reviews = item.get_elements('EditorialReview')
-  #reviews.each do |review|
-  #  p el.get('Content')
-  #end
-
-  # 2) return Nokogiri::XML::NodeSet object or nil if not found
-  #reviews = item/'EditorialReview'
-  #reviews&.each do |review|
-  #  el = Amazon::Element.new(review)
-  #  p el.get('Content')
-  #end
 end
