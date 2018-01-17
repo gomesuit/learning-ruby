@@ -21,7 +21,10 @@ RakutenWebService.configuration do |c|
   c.debug = true # default: false
 end
 
-items = RakutenWebService::Ichiba::Item.search(keyword: 'Ruby') # This returns Enumerable object
-items.first(10).each do |item|
-  puts "#{item['itemName']}, #{item.price} yen" # You can refer to values as well as Hash.
-end
+# items = RakutenWebService::Ichiba::Item.search(keyword: 'Ruby') # This returns Enumerable object
+# items.first(10).each do |item|
+#   puts "#{item['itemName']}, #{item.price} yen" # You can refer to values as well as Hash.
+# end
+
+items = RakutenWebService::Books::Total.search(keyword: '球詠　３巻 (まんがタイムKRコミックス)', or_flag: 1)
+binding.pry
