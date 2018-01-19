@@ -32,6 +32,7 @@ GEM
     pry-doc (0.10.0)
       pry (~> 0.9)
       yard (~> 0.9)
+    retryable (3.0.0)
     slop (3.6.0)
     unf (0.1.4)
       unf_ext
@@ -46,6 +47,7 @@ DEPENDENCIES
   mechanize
   pry
   pry-doc
+  retryable
 
 BUNDLED WITH
-   1.14.6
+   1.15.1
