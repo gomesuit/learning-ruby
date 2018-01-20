@@ -30,14 +30,14 @@ Mechanize.start do |m|
     end
     elem = m.page.parser.css('.swatchElement a.a-button-text')[1]
     unless elem.nil?
-      sleep 1
       pp elem.attributes['href'].value
-      Retryable.retryable(tries: 10, sleep: 5) do
-        m.get elem.attributes['href'].value
-      end
-      isbn10 = m.page.parser.css('#detail_bullets_id .content ul li')[3].children[1].text.strip
-      isbn13 = m.page.parser.css('#detail_bullets_id .content ul li')[4].children[1].text.strip.gsub('-', '')
-      pp "asin: #{asin}, ISBN-10: #{isbn10}, ISBN-13: #{isbn13}"
+      # Retryable.retryable(tries: 10, sleep: 5) do
+      #   m.get elem.attributes['href'].value
+      # end
+      # isbn10 = m.page.parser.css('#detail_bullets_id .content ul li')[3].children[1].text.strip
+      # isbn13 = m.page.parser.css('#detail_bullets_id .content ul li')[4].children[1].text.strip.gsub('-', '')
+      isbn10 = elem.attributes['href'].value.split('/')[3]
+      pp "asin: #{asin}, ISBN-10: #{isbn10}"
     end
   end
 end
