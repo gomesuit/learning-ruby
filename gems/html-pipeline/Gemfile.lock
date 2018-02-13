@@ -6,6 +6,8 @@ GEM
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    commonmarker (0.17.7.1)
+      ruby-enum (~> 0.5)
     concurrent-ruby (1.0.5)
     html-pipeline (2.7.1)
       activesupport (>= 2)
@@ -16,6 +18,8 @@ GEM
     minitest (5.11.3)
     nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
+    ruby-enum (0.7.1)
+      i18n
     thread_safe (0.3.6)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
@@ -24,6 +28,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  commonmarker
   html-pipeline
 
 BUNDLED WITH
