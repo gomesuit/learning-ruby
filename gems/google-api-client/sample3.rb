@@ -12,18 +12,26 @@ client.authorization = Google::Auth::ServiceAccountCredentials.make_creds(
 )
 
 date_range = analytics::DateRange.new(start_date: '7DaysAgo', end_date: 'today')
+
 metric = analytics::Metric.new(expression: 'ga:users')
-dimension = analytics::Dimension.new(name: 'ga:browser')
+
+dimensions = [
+  analytics::Dimension.new(name: 'ga:source'),
+  analytics::Dimension.new(name: 'ga:medium'),
+  analytics::Dimension.new(name: 'ga:pagePath')
+]
+
 request = analytics::GetReportsRequest.new(
   report_requests: [analytics::ReportRequest.new(
-    view_id: view_id, metrics: [metric], dimensions: [dimension], date_ranges: [date_range]
+    view_id: view_id, metrics: [metric], dimensions: dimensions, date_ranges: [date_range]
   )]
 )
+
 response = client.batch_get_reports(request)
 
 pp response.reports[0].column_header.dimensions
 pp response.reports[0].column_header.metric_header.to_h
 
 response.reports[0].data.rows.each do |row|
-  pp row.to_h
+  pp row.dimensions
 end
