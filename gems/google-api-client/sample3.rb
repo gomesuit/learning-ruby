@@ -1,7 +1,6 @@
-require 'googleauth/stores/redis_token_store'
 require 'google/apis/analyticsreporting_v4'
 
-view_id = 'XXXXXXXX'
+view_id = ENV['GA_VIEW_ID']
 scope = ['https://www.googleapis.com/auth/analytics.readonly']
 analytics =Google::Apis::AnalyticsreportingV4
 

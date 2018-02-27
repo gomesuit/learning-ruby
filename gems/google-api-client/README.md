@@ -1,3 +1,4 @@
 - 参考
   - https://developers.google.com/sheets/api/quickstart/ruby
   - https://developers.google.com/api-client-library/ruby/auth/api-keys
+  - https://qiita.com/ryota-sasabe/items/a5efd2aac244cfcce5c7
