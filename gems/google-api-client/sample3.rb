@@ -1,4 +1,5 @@
 require 'google/apis/analyticsreporting_v4'
+require 'pry'
 
 view_id = ENV['GA_VIEW_ID']
 scope = ['https://www.googleapis.com/auth/analytics.readonly']
@@ -11,7 +12,7 @@ client.authorization = Google::Auth::ServiceAccountCredentials.make_creds(
 )
 
 date_range = analytics::DateRange.new(start_date: '7DaysAgo', end_date: 'today')
-metric = analytics::Metric.new(expression: 'ga:sessions', alias: 'sessions')
+metric = analytics::Metric.new(expression: 'ga:users')
 dimension = analytics::Dimension.new(name: 'ga:browser')
 request = analytics::GetReportsRequest.new(
   report_requests: [analytics::ReportRequest.new(
@@ -20,4 +21,9 @@ request = analytics::GetReportsRequest.new(
 )
 response = client.batch_get_reports(request)
 
-pp response.reports
+pp response.reports[0].column_header.dimensions
+pp response.reports[0].column_header.metric_header.to_h
+
+response.reports[0].data.rows.each do |row|
+  pp row.to_h
+end
