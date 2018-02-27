@@ -21,9 +21,21 @@ dimensions = [
   analytics::Dimension.new(name: 'ga:pagePath')
 ]
 
+dimension_filters = [
+  analytics::DimensionFilter.new(dimension_name: 'ga:pagePath', expressions: ['/items/.*'])
+]
+
+dimension_filter_clauses = [
+  analytics::DimensionFilterClause.new(operator: 'AND', filters: dimension_filters)
+]
+
 request = analytics::GetReportsRequest.new(
   report_requests: [analytics::ReportRequest.new(
-    view_id: view_id, metrics: [metric], dimensions: dimensions, date_ranges: [date_range]
+    view_id: view_id,
+    metrics: [metric],
+    dimensions: dimensions,
+    dimension_filter_clauses: dimension_filter_clauses,
+    date_ranges: [date_range]
   )]
 )
 
