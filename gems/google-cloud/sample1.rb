@@ -3,7 +3,7 @@ require "google/cloud/bigquery"
 
 # Instantiates a client
 bigquery = Google::Cloud::Bigquery.new(
-  project: 'xxxxxxxxxxx',
+  project: ENV['PROJECT_ID'],
   keyfile: './service-account-key.json'
 )
 
