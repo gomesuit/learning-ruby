@@ -1,0 +1,1 @@
+- https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-bigquery/v1.1.0/google/cloud/bigquery
