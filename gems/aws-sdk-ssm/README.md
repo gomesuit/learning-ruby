@@ -1,6 +1,7 @@
 
 
 - https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/sysman-paramstore-cli.html
+- https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html
 
 - パラメータストア を使用して文字列パラメータを作成するには
 ```
