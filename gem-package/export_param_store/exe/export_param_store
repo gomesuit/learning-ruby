@@ -1,3 +1,5 @@
 #!/usr/bin/env ruby
 
 require "export_param_store"
+
+ExportParamStore.start ARGV[0]
