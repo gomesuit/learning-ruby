@@ -40,4 +40,3 @@ export <%= param.name.delete(@path) %>=<%= param.value %>
     puts ERB.new(contents, nil, 2).result(binding)
   end
 end
-
