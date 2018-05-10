@@ -3,14 +3,20 @@ require 'aws-sdk-cognitoidentity'
 
 client = Aws::CognitoIdentity::Client.new
 
+resp = client.get_identity_pool_roles(
+  identity_pool_id: ''
+)
 
-# developer identityでログイン処理を行う
-resp = client.get_open_id_token_for_developer_identity(
-    identity_pool_id: 'us-east-1:00000000-0000-0000-0000-000000000000',
-    logins: { 'com.yujiroarai.provider' => 'abcde' }
-  )
-
-puts "Identity ID: #{resp.identity_id}"
-puts "Access Token: #{resp.token}"
+puts resp.identity_pool_id #=> String
+puts resp.roles #=> Hash
+puts resp.roles["RoleType"] #=> String
+puts resp.role_mappings #=> Hash
+# puts resp.role_mappings["IdentityProviderName"].type #=> String, one of "Token", "Rules"
+# puts resp.role_mappings["IdentityProviderName"].ambiguous_role_resolution #=> String, one of "AuthenticatedRole", "Deny"
+# puts resp.role_mappings["IdentityProviderName"].rules_configuration.rules #=> Array
+# puts resp.role_mappings["IdentityProviderName"].rules_configuration.rules[0].claim #=> String
+# puts resp.role_mappings["IdentityProviderName"].rules_configuration.rules[0].match_type #=> String, one of "Equals", "Contains", "StartsWith", "NotEqual"
+# puts resp.role_mappings["IdentityProviderName"].rules_configuration.rules[0].value #=> String
+# puts resp.role_mappings["IdentityProviderName"].rules_configuration.rules[0].role_arn #=> String
 
 pp 'finish'
