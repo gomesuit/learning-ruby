@@ -21,6 +21,6 @@ resp = client.put_record_batch({
   ],
 })
 
-binding.pry
+# binding.pry
 
 pp 'finish'
