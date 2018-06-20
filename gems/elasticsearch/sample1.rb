@@ -3,11 +3,14 @@ require 'elasticsearch'
 
 client = Elasticsearch::Client.new(host: '192.168.33.10', log: true)
 
-#client.transport.reload_connections!
+# client.transport.reload_connections!
 
 client.cluster.health
 
-client.create index: 'hello', type: 'world', id: 2, body: { title: 'Hello Elasticsearch!' }
+json = '{ "title": "Hello Elasticsearch!" }'
+body = JSON.parse(json)
+
+client.create index: 'hello', type: 'world', id: 2, body: body
 
 client.search q: 'Hello'
 
