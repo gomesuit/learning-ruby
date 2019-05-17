@@ -1,3 +1,5 @@
 /.env
 /*.json
 /.envrc
+*.json
+*.csv
