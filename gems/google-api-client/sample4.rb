@@ -11,6 +11,7 @@ CREDENTIAL_STORE_FILE = "#{$PROGRAM_NAME}-oauth2.json".freeze
 Drive = Google::Apis::DriveV3
 drive = Drive::DriveService.new
 
+Google::Apis::RequestOptions.default.retries = 10
 storage = Google::APIClient::Storage.new(
   Google::APIClient::FileStore.new(CREDENTIAL_STORE_FILE)
 )
@@ -44,23 +45,6 @@ def get_files(drive, folder_id)
   end
 end
 
-def write_csv(dirname, file)
-  owner = file.owners.first
-  permissions = file.permissions.map{ |x| "#{x.display_name} <#{x.email_address}>" }.join("\n")
-  CSV.open('test.csv', 'a') do |csv|
-    print dirname
-    print file.name
-    print "#{owner.display_name} <#{owner.email_address}>"
-    puts permissions
-    csv << [
-      dirname,
-      file.name,
-      "#{owner.display_name} <#{owner.email_address}>",
-      permissions
-    ]
-  end
-end
-
 def render_file(dirname, file)
   write_csv(dirname, file)
 end
@@ -71,8 +55,19 @@ def render_folder(drive, folder, dirname)
   get_folders(drive, folder.id).each do |folder|
     render_folder(drive, folder, "#{dirname} / #{folder.name}")
   end
-  get_files(drive, folder.id).each do |file|
-    render_file(dirname, file)
+  CSV.open('test.csv', 'a') do |csv|
+    get_files(drive, folder.id).each do |file|
+      owner = file.owners.first
+      permissions = file.permissions&.map{ |x| "#{x.display_name} <#{x.email_address}>" }&.join("\n")
+      print dirname
+      puts file.name
+      csv << [
+        dirname,
+        file.name,
+        "#{owner.display_name} <#{owner.email_address}>",
+        permissions
+      ]
+    end
   end
 end
 
