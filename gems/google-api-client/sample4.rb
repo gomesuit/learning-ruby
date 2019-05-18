@@ -11,7 +11,7 @@ CREDENTIAL_STORE_FILE = "#{$PROGRAM_NAME}-oauth2.json".freeze
 Drive = Google::Apis::DriveV3
 drive = Drive::DriveService.new
 
-Google::Apis::RequestOptions.default.retries = 10
+Google::Apis::RequestOptions.default.retries = 30
 storage = Google::APIClient::Storage.new(
   Google::APIClient::FileStore.new(CREDENTIAL_STORE_FILE)
 )
