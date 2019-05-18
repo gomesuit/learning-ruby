@@ -11,7 +11,7 @@ CREDENTIAL_STORE_FILE = "#{$PROGRAM_NAME}-oauth2.json".freeze
 Drive = Google::Apis::DriveV3
 drive = Drive::DriveService.new
 
-Google::Apis::RequestOptions.default.retries = 30
+Google::Apis::RequestOptions.default.retries = 1000
 storage = Google::APIClient::Storage.new(
   Google::APIClient::FileStore.new(CREDENTIAL_STORE_FILE)
 )
@@ -40,7 +40,7 @@ def get_files(drive, folder_id)
   items = drive.fetch_all(items: :files) do |token|
     drive.list_files(
       q: "'#{folder_id}' in parents and mimeType!='application/vnd.google-apps.folder'",
-      fields: 'nextPageToken, files(id, name, owners, permissions)',
+      fields: 'nextPageToken, files(id, name, owners, permissions, created_time, modified_time)',
       order_by: 'name',
       page_token: token
     )
@@ -52,6 +52,7 @@ def render_file(dirname, file)
 end
 
 ROOT_ID = ARGV[0]
+ROOT_DIR_NAME = ARGV[1]
 
 CSV_FILE_NAME = "#{ROOT_ID}.csv"
 
@@ -69,16 +70,25 @@ def render_folder(drive, folder, dirname)
         dirname,
         file.name,
         "#{owner.display_name} <#{owner.email_address}>",
-        permissions
+        file.created_time.strftime('%Y/%m/%d'),
+        file.modified_time.strftime('%Y/%m/%d'),
+        file.permissions&.size,
+        permissions,
       ]
     end
   end
 end
 
+
 root = drive.get_file(ROOT_ID)
-get_folders(drive, ROOT_ID).each do |folder|
-  puts "#{folder.id} / #{folder.name}"
-  render_folder(drive, folder, "#{root.name} / #{folder.name}")
+
+if ROOT_DIR_NAME
+  render_folder(drive, root, ROOT_DIR_NAME)
+else
+  get_folders(drive, ROOT_ID).each do |folder|
+    puts "#{folder.id} / #{folder.name}"
+    render_folder(drive, folder, "#{root.name} / #{folder.name}")
+  end
 end
 
 # https://www.rubydoc.info/github/google/google-api-ruby-client/Google/Apis/DriveV3/DriveService
