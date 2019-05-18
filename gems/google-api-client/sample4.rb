@@ -53,11 +53,13 @@ end
 
 ROOT_ID = ARGV[0]
 
+CSV_FILE_NAME = "#{ROOT_ID}.csv"
+
 def render_folder(drive, folder, dirname)
   get_folders(drive, folder.id).each do |folder|
     render_folder(drive, folder, "#{dirname} / #{folder.name}")
   end
-  CSV.open('test.csv', 'a', force_quotes: true) do |csv|
+  CSV.open(CSV_FILE_NAME, 'a', force_quotes: true) do |csv|
     get_files(drive, folder.id).each do |file|
       owner = file.owners.first
       permissions = file.permissions&.map{ |x| "#{x.display_name} <#{x.email_address}>" }&.join(",")
