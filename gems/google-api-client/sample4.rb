@@ -56,7 +56,11 @@ ROOT_DIR_NAME = ARGV[1]
 
 CSV_FILE_NAME = "#{ROOT_ID}.csv"
 
+EXCLUDE_IDS = [
+]
+
 def render_folder(drive, folder, dirname)
+  return if EXCLUDE_IDS.include? folder.id
   get_folders(drive, folder.id).each do |folder|
     render_folder(drive, folder, "#{dirname} / #{folder.name}")
   end
@@ -78,7 +82,6 @@ def render_folder(drive, folder, dirname)
     end
   end
 end
-
 
 root = drive.get_file(ROOT_ID)
 
