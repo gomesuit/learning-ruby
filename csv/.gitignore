@@ -2,3 +2,4 @@
 /**/*.csv
 
 .byebug_history
+*.csv
