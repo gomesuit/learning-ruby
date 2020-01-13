@@ -1,6 +1,7 @@
 require 'google/apis/drive_v3'
 require 'google/api_client/client_secrets'
 require 'google/api_client/auth/installed_app'
+require 'launchy'
 require 'google/api_client/auth/storage'
 require 'google/api_client/auth/storages/file_store'
 require 'pry'
